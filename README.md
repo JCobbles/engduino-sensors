@@ -1,5 +1,5 @@
 # engduino-sensors
-Measures temperature and light variation and uploads this data to an Azure app
+Measures temperature and light variation and uploads this data to an Azure app. Ideally the experiment would run for a full day, but to preview how the experiment would work the data is collected at 1 second intervals.
 
 * Download repository
 * Flash the Engduino with the `LightTemperatureVariation.ino`
