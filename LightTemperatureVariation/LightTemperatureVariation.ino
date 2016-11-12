@@ -15,23 +15,6 @@ void setup()
   Serial.begin(9600);
 }
 
-/*
-* Calculates the light level based on data from the light sensor
-* Returns light level ranged 0 - 1023
-*/
-unsigned long calculateLightValue() {
-  // Take an average of 100 readings of the analogue input
-  unsigned long light = 0;
-  for (int i = 0; i < 100; i++) {
-  	light += analogRead(LIGHT_SENSOR_CHANNEL);
-  }
-  return light / 100;
-}
-
-float getTemperature() {
-  return EngduinoThermistor.temperature();
-}
-
 void loop() { 
   unsigned long lightValue = calculateLightValue();
   float temperature = getTemperature();
@@ -54,3 +37,19 @@ void loop() {
   delay(500);
 }
 
+/*
+* Calculates the light level based on data from the light sensor
+* Returns light level ranged 0 - 1023
+*/
+unsigned long calculateLightValue() {
+  // Take an average of 100 readings of the analogue input
+  unsigned long light = 0;
+  for (int i = 0; i < 100; i++) {
+  	light += analogRead(LIGHT_SENSOR_CHANNEL);
+  }
+  return light / 100;
+}
+
+float getTemperature() {
+  return EngduinoThermistor.temperature();
+}
