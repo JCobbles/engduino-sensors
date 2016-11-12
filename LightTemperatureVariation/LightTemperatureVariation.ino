@@ -6,6 +6,8 @@
 
 // The light sensor is channel 4
 const int LIGHT_SENSOR_CHANNEL = 4;
+unsigned long previousLightValue = 0;
+float previousTemperature = 0;
 
 void setup()
 {
@@ -19,13 +21,17 @@ void loop() {
   unsigned long lightValue = calculateLightValue();
   float temperature = getTemperature();
   
-  Serial.print(lightValue);
-  Serial.print(",");
-  Serial.print(temperature);
-  Serial.print("\n");
+  if (lightValue != previousLightValue || temperature != previousTemperature) {
+    Serial.print(lightValue);
+    Serial.print(",");
+    Serial.print(temperature);
+    Serial.print("\n");
+  }
   
-  // Maximum light level is 1024 
-  // 1024 / 16 = 64, therefore we divide the real light value by 64 to get the last LED to light up
+  previousLightValue = lightValue;
+  previousTemperature = temperature;
+  
+  // We want to be more sensitive to low light
   int lastLED = lightValue / 64;
   for (int i = 0; i < lastLED; i++) {
     EngduinoLEDs.setLED(i, WHITE, 2);
